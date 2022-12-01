@@ -47,7 +47,7 @@ ui <- navbarPage(theme = shinytheme('flatly'),
                    
                    # Show a plot of the generated distribution
                    mainPanel(
-                     #textOutput("txt"),
+                     h3(textOutput("txt")),
                      #plotOutput("distPlot"),
                      #uiOutput("ui_rend"),
                      leafletOutput("map")#,
@@ -98,8 +98,21 @@ server <- function(input, output) {
   
   # })
   
+  output$txt <- renderText({
+    if(input$act!=0) {
+      paste0("Showing results for ",input$trm," in ",input$loc)
+    } else{
+    "Where would you like to search today??"}
+    
+  })
+  
+  
   
   output$map <- renderLeaflet({
+    
+    if(input$act==0) {
+      return(NULL)
+    }
     
     lat = vals$a$region$center$latitude
     long = vals$a$region$center$longitude
