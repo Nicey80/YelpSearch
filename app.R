@@ -10,6 +10,7 @@
 source('funcs.R')
 library(shiny)
 library(shinythemes)
+library(shinydashboard)
 
 
 # Define UI for application that draws a histogram
@@ -23,6 +24,7 @@ ui <- navbarPage(theme = shinytheme('flatly'),
                  # Sidebar with a slider input for number of bins 
                  sidebarLayout(
                    sidebarPanel(
+                 
                      textInput("loc","Search location"),
                      textInput("trm", "Search for businesses:"),
                      sliderInput("searchradius",
@@ -30,6 +32,10 @@ ui <- navbarPage(theme = shinytheme('flatly'),
                                  min = 1,
                                  max = 20,
                                  value = 5),
+                     br(),
+                     actionButton("act","Search", class = 'btn-primary btn-lg rightAlign'),
+                     br(),
+                     #box(title="Additional Options", collapsible=T, status = 'primary', solidHeader=T, width = 12,
                      radioButtons("Rate",
                                   "Minimum Rating:",
                                   choiceNames = list(div(icon("star")),
@@ -41,8 +47,9 @@ ui <- navbarPage(theme = shinytheme('flatly'),
                                   choiceValues = list(1,2,3,4,5)
                                   
                                   
-                     ),
-                     actionButton("act","Search", class = 'btn-primary btn-lg rightAlign')
+                     #)
+                     )
+
                    ),
                    
                    # Show a plot of the generated distribution
